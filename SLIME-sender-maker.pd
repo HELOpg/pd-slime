@@ -1,0 +1,27 @@
+#N canvas 64 67 426 550 10;
+#X obj 175 346 s pd-SLIME-senders;
+#N canvas 507 54 238 390 SLIME-senders 1;
+#X restore 246 33 pd SLIME-senders;
+#X text 35 33 udpSLIME senders created in here:;
+#X msg 175 155 read slimetest.txt;
+#X obj 175 197 cyclone/coll;
+#C restore;
+#X msg 252 261 dump;
+#X obj 175 289 pack s 0;
+#X obj 251 232 t b b;
+#X msg 307 264 clear;
+#X msg 175 318 obj 20 \$2 udpSLIME \$1;
+#X obj 193 253 * 30;
+#X text 24 84 read the coll formatted txt file list of target addresses
+and an instance of [udpSLIME] will be created for each...;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 4 1 10 0;
+#X connect 4 2 7 0;
+#X connect 5 0 4 0;
+#X connect 6 0 9 0;
+#X connect 7 0 5 0;
+#X connect 7 1 8 0;
+#X connect 8 0 0 0;
+#X connect 9 0 0 0;
+#X connect 10 0 6 1;
