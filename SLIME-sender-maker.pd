@@ -1,23 +1,54 @@
-#N canvas 64 67 426 550 10;
-#X obj 175 346 s pd-SLIME-senders;
-#N canvas 507 54 238 390 SLIME-senders 1;
+#N canvas 54 120 426 550 10;
+#X obj 107 394 s pd-SLIME-senders;
+#N canvas 507 54 238 390 SLIME-senders 0;
+#X obj 20 30 udpSLIME 192.168.0.5;
+#X obj 20 60 udpSLIME 192.168.0.6;
 #X restore 246 33 pd SLIME-senders;
 #X text 35 33 udpSLIME senders created in here:;
-#X msg 175 155 read slimetest.txt;
-#X obj 175 197 cyclone/coll;
+#X msg 107 170 read slimetest.txt;
+#X obj 107 245 cyclone/coll;
 #C restore;
-#X msg 252 261 dump;
-#X obj 175 289 pack s 0;
-#X obj 251 232 t b b;
-#X msg 307 264 clear;
-#X msg 175 318 obj 20 \$2 udpSLIME \$1;
-#X obj 193 253 * 30;
-#X text 24 84 read the coll formatted txt file list of target addresses
+#X msg 184 309 dump;
+#X obj 107 337 pack s 0;
+#X obj 183 280 t b b;
+#X msg 239 312 clear;
+#X msg 107 366 obj 20 \$2 udpSLIME \$1;
+#X obj 125 301 * 30;
+#X text 23 96 read the coll formatted txt file list of target addresses
 and an instance of [udpSLIME] will be created for each...;
+#X obj 235 281 s udpSLIME.connect;
+#N canvas 509 258 655 321 without.txt 0;
+#X obj 34 275 outlet;
+#X obj 151 153 bng 15 250 50 0 empty empty typical-ip-at-casa-freeman
+17 7 0 10 -262144 -1 -1;
+#X obj 152 268 outlet;
+#X msg 181 204 clear \, 1 192.168.0.5 \, 2 192.168.0.6;
+#X obj 152 176 t b b;
+#X obj 93 23 bng 15 250 50 0 empty empty typical-ip-SLIME-dec2012 17
+7 0 10 -262144 -1 -1;
+#X obj 94 46 t b b;
+#X msg 123 74 clear \, 1 shrpi.slime.test \, 2 sfmac.slime.test \,
+3 sfrpi.slime.test \, 4 jblap.slime.test \, 5 shnet.slime.test \, 6
+jbrpi.slime.test;
+#X connect 1 0 4 0;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
+#X connect 4 1 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 2 0;
+#X connect 6 1 7 0;
+#X connect 7 0 0 0;
+#X restore 135 206 pd without.txt;
+#X obj 248 489 osc/packOSC;
+#X obj 248 510 s toSLIME;
+#X text 230 205 <- look;
+#X text 30 455 to send messages use both [packOSC] and [s toSLIME]
+;
 #X connect 3 0 4 0;
 #X connect 4 0 6 0;
 #X connect 4 1 10 0;
 #X connect 4 2 7 0;
+#X connect 4 3 12 0;
 #X connect 5 0 4 0;
 #X connect 6 0 9 0;
 #X connect 7 0 5 0;
@@ -25,3 +56,6 @@ and an instance of [udpSLIME] will be created for each...;
 #X connect 8 0 0 0;
 #X connect 9 0 0 0;
 #X connect 10 0 6 1;
+#X connect 13 0 4 0;
+#X connect 13 1 7 0;
+#X connect 14 0 15 0;
