@@ -1,0 +1,69 @@
+#N canvas 89 54 379 657 10;
+#X obj 109 423 s pd-SLIME-senders;
+#N canvas 507 54 238 390 SLIME-senders 0;
+#X restore 192 60 pd SLIME-senders;
+#X text 35 33 udpSLIME senders created in here:;
+#X obj 109 274 cyclone/coll;
+#C restore;
+#X msg 186 338 dump;
+#X obj 109 366 pack s 0;
+#X obj 185 309 t b b;
+#X msg 241 341 clear;
+#X msg 109 395 obj 20 \$2 udpSLIME \$1;
+#X obj 127 330 * 30;
+#X text 23 96 read the coll formatted txt file list of target addresses
+and an instance of [udpSLIME] will be created for each...;
+#X obj 237 310 s udpSLIME.connect;
+#N canvas 509 258 655 321 without.txt 0;
+#X obj 34 275 outlet;
+#X obj 151 153 bng 15 250 50 0 empty empty typical-ip-at-casa-freeman
+17 7 0 10 -262144 -1 -1;
+#X obj 152 268 outlet;
+#X msg 181 204 clear \, 1 192.168.0.5 \, 2 192.168.0.6;
+#X obj 152 176 t b b;
+#X obj 93 23 bng 15 250 50 0 empty empty typical-ip-SLIME-dec2012 17
+7 0 10 -262144 -1 -1;
+#X obj 94 46 t b b;
+#X msg 123 74 clear \, 1 shrpi.slime.test \, 2 sfmac.slime.test \,
+3 sfrpi.slime.test \, 4 jblap.slime.test \, 5 shnet.slime.test \, 6
+jbrpi.slime.test;
+#X connect 1 0 4 0;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
+#X connect 4 1 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 2 0;
+#X connect 6 1 7 0;
+#X connect 7 0 0 0;
+#X restore 133 239 pd without.txt;
+#X obj 248 489 osc/packOSC;
+#X obj 248 510 s toSLIME;
+#X text 30 455 to send messages use both [packOSC] and [s toSLIME]
+;
+#X text 112 213 for listing other ip address into the coll;
+#X msg 51 168 read dnsnames-collformat.txt;
+#X obj 43 508 iemnet/udpreceive 10000;
+#X obj 36 583 spigot;
+#X obj 21 553 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 42 539 osc/unpackOSC;
+#X obj 19 624 print udp_in;
+#X obj 111 583 s fromSLIME;
+#X connect 3 0 5 0;
+#X connect 3 1 9 0;
+#X connect 3 2 6 0;
+#X connect 3 3 11 0;
+#X connect 4 0 3 0;
+#X connect 5 0 8 0;
+#X connect 6 0 4 0;
+#X connect 6 1 7 0;
+#X connect 7 0 0 0;
+#X connect 8 0 0 0;
+#X connect 9 0 5 1;
+#X connect 12 0 3 0;
+#X connect 12 1 6 0;
+#X connect 13 0 14 0;
+#X connect 17 0 3 0;
+#X connect 18 0 21 0;
+#X connect 19 0 22 0;
+#X connect 20 0 19 1;
